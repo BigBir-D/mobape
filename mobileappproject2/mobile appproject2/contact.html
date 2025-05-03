@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SalesPro | Contact Us</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <aside class="sidebar">
+            <div class="user-profile">
+                <img src="images/user-avatar.jpg" alt="User Avatar" class="user-avatar">
+                <h3 class="username">John Doe</h3>
+                <p class="user-role">Store Manager</p>
+            </div>
+            <nav class="side-nav">
+                <ul>
+                    <li><a href="index.html"><i class="fas fa-home"></i> Dashboard</a></li>
+                    <li><a href="products.html"><i class="fas fa-boxes"></i> Products</a></li>
+                    <li><a href="inventory.html"><i class="fas fa-warehouse"></i> Inventory</a></li>
+                    <li class="active"><a href="contact.html"><i class="fas fa-envelope"></i> Contact</a></li>
+                    <li><a href="#" id="logout-btn"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+                </ul>
+            </nav>
+        </aside>
+
+        <main class="main-content">
+            <header class="main-header">
+                <h1>Contact Us</h1>
+                <div class="date-time" id="currentDateTime"></div>
+            </header>
+
+            <div class="contact-container">
+                <div class="contact-info">
+                    <h2>Get in Touch</h2>
+                    <p>Have questions or need support? Reach out to our team.</p>
+                    
+                    <div class="contact-method">
+                        <i class="fas fa-phone"></i>
+                        <div>
+                            <h3>Phone</h3>
+                            <p>+1 (876) 555-1234</p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-method">
+                        <i class="fas fa-envelope"></i>
+                        <div>
+                            <h3>Email</h3>
+                            <p>support@salespro.com</p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-method">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <div>
+                            <h3>Address</h3>
+                            <p>123 Business Ave, Kingston, Jamaica</p>
+                        </div>
+                    </div>
+                    
+                    <div class="business-hours">
+                        <h3>Business Hours</h3>
+                        <ul>
+                            <li>Monday - Friday: 8:00 AM - 5:00 PM</li>
+                            <li>Saturday: 9:00 AM - 2:00 PM</li>
+                            <li>Sunday: Closed</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="contact-form-container">
+                    <h2>Send Us a Message</h2>
+                    <form id="contactForm" class="contact-form">
+                        <div class="form-group">
+                            <label for="contactName">Your Name</label>
+                            <input type="text" id="contactName" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="contactEmail">Email Address</label>
+                            <input type="email" id="contactEmail" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="contactSubject">Subject</label>
+                            <input type="text" id="contactSubject" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="contactMessage">Message</label>
+                            <textarea id="contactMessage" rows="5" required></textarea>
+                        </div>
+                        
+                        <button type="submit" class="btn-primary">Send Message</button>
+                    </form>
+                </div>
+            </div>
+            
+            <div class="feedback-section">
+                <h2>Feedback & Suggestions</h2>
+                <p>We value your feedback to improve our services.</p>
+                
+                <div class="feedback-form">
+                    <div class="form-group">
+                        <label>How would you rate your experience?</label>
+                        <div class="rating-stars">
+                            <input type="radio" id="star5" name="rating" value="5">
+                            <label for="star5"><i class="fas fa-star"></i></label>
+                            <input type="radio" id="star4" name="rating" value="4">
+                            <label for="star4"><i class="fas fa-star"></i></label>
+                            <input type="radio" id="star3" name="rating" value="3">
+                            <label for="star3"><i class="fas fa-star"></i></label>
+                            <input type="radio" id="star2" name="rating" value="2">
+                            <label for="star2"><i class="fas fa-star"></i></label>
+                            <input type="radio" id="star1" name="rating" value="1">
+                            <label for="star1"><i class="fas fa-star"></i></label>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="feedbackComments">Comments</label>
+                        <textarea id="feedbackComments" rows="3" placeholder="What did you like or what can we improve?"></textarea>
+                    </div>
+                    
+                    <button type="button" class="btn-secondary" id="submitFeedback">Submit Feedback</button>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="js/script.js"></script>
+</body>
+</html>
