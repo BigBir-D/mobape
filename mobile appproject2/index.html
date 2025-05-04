@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StockTrack - Login</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <style>
+        body {
+            background: linear-gradient(135deg, #3498db, #2c3e50);
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .login-container {
+            width: 90%;
+            max-width: 400px;
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            animation: fadeIn 0.5s ease-in-out;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .logo {
+            display: block;
+            margin: 0 auto 1rem;
+            width: 100px;
+        }
+        
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 1.5rem;
+            font-size: 1.5rem;
+        }
+        
+        .form-group {
+            margin-bottom: 1.2rem;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #2c3e50;
+            font-weight: 500;
+        }
+        
+        input[type="email"],
+        input[type="password"] {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+            transition: border 0.3s;
+        }
+        
+        input[type="email"]:focus,
+        input[type="password"]:focus {
+            border-color: #3498db;
+            outline: none;
+        }
+        
+        .checkbox {
+            display: flex;
+            align-items: center;
+            margin: 1rem 0;
+        }
+        
+        .checkbox input {
+            margin-right: 0.5rem;
+        }
+        
+        .btn-primary {
+            width: 100%;
+            padding: 0.8rem;
+            background: #3498db;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        
+        .btn-primary:hover {
+            background: #2980b9;
+        }
+        
+        .register-link {
+            text-align: center;
+            margin-top: 1.5rem;
+            color: #7f8c8d;
+        }
+        
+        .register-link a {
+            color: #3498db;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        
+        .register-link a:hover {
+            text-decoration: underline;
+        }
+        
+        @media (max-width: 480px) {
+            .login-container {
+                padding: 1.5rem;
+            }
+            
+            h1 {
+                font-size: 1.3rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <header>
+            <img src="images/logo.png" alt="StockTrack Logo" class="logo">
+            <h1>Welcome to StockTrack</h1>
+        </header>
+        
+        <form id="loginForm" onsubmit="return validateLogin()">
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required placeholder="Enter your email">
+            </div>
+            
+            <div class="form-group">
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" required placeholder="Enter your password">
+            </div>
+            
+            <div class="checkbox">
+                <input type="checkbox" id="remember" name="remember">
+                <label for="remember">Remember me</label>
+            </div>
+            
+            <button type="submit" class="btn-primary">Login</button>
+            
+            <p class="register-link">Don't have an account? <a href="#" onclick="showRegister()">Register here</a></p>
+        </form>
+        
+        <!-- Registration Form (hidden by default) -->
+        <form id="registerForm" style="display: none;" onsubmit="return validateRegister()">
+            <div class="form-group">
+                <label for="regName">Full Name:</label>
+                <input type="text" id="regName" name="regName" required placeholder="Enter your full name">
+            </div>
+            
+            <div class="form-group">
+                <label for="regEmail">Email:</label>
+                <input type="email" id="regEmail" name="regEmail" required placeholder="Enter your email">
+            </div>
+            
+            <div class="form-group">
+                <label for="regPassword">Password:</label>
+                <input type="password" id="regPassword" name="regPassword" required placeholder="Create a password">
+            </div>
+            
+            <div class="form-group">
+                <label for="regConfirm">Confirm Password:</label>
+                <input type="password" id="regConfirm" name="regConfirm" required placeholder="Confirm your password">
+            </div>
+            
+            <button type="submit" class="btn-primary">Register</button>
+            
+            <p class="register-link">Already have an account? <a href="#" onclick="showLogin()">Login here</a></p>
+        </form>
+    </div>
+
+    <script src="js/auth.js"></script>
+</body>
+</html>

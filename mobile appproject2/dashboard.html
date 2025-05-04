@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StockTrack - Dashboard</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <style>
+        :root {
+            --primary-color: #3498db;
+            --secondary-color: #2980b9;
+            --accent-color: #e74c3c;
+            --light-color: #ecf0f1;
+            --dark-color: #2c3e50;
+            --success-color: #2ecc71;
+            --warning-color: #f39c12;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f5f5f5;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .app-container {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* Side Navigation */
+        .sidenav {
+            width: 250px;
+            background: var(--dark-color);
+            color: white;
+            padding: 1.5rem 1rem;
+            position: fixed;
+            height: 100%;
+            transition: all 0.3s;
+        }
+
+        .user-profile {
+            text-align: center;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .user-profile img {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 0.5rem;
+            border: 3px solid var(--primary-color);
+        }
+
+        .user-profile h3 {
+            font-size: 1.1rem;
+            font-weight: 500;
+        }
+
+        .sidenav ul {
+            list-style: none;
+        }
+
+        .sidenav li {
+            margin-bottom: 0.5rem;
+        }
+
+        .sidenav a {
+            display: block;
+            padding: 0.7rem 1rem;
+            color: var(--light-color);
+            text-decoration: none;
+            border-radius: 5px;
+            transition: all 0.3s;
+            font-weight: 500;
+        }
+
+        .sidenav a:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .sidenav a.active {
+            background: var(--primary-color);
+        }
+
+        .btn-logout {
+            width: 100%;
+            padding: 0.7rem;
+            background: var(--accent-color);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .btn-logout:hover {
+            background: #c0392b;
+        }
+
+        /* Main Content */
+        .main-content {
+            flex: 1;
+            padding: 1.5rem;
+            margin-left: 250px;
+            transition: all 0.3s;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid #ddd;
+        }
+
+        header h2 {
+            color: var(--dark-color);
+        }
+
+        #currentDateTime {
+            color: #7f8c8d;
+            font-size: 0.9rem;
+        }
+
+        /* Dashboard Cards */
+        .dashboard-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .card h3 {
+            color: #7f8c8d;
+            font-size: 1rem;
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+        }
+
+        .card .value {
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: var(--dark-color);
+        }
+
+        .card .trend {
+            display: flex;
+            align-items: center;
+            margin-top: 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        .card .trend.up {
+            color: var(--success-color);
+        }
+
+        .card .trend.down {
+            color: var(--accent-color);
+        }
+
+        /* Recent Activity */
+        .recent-activity {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            margin-top: 1.5rem;
+        }
+
+        .recent-activity h3 {
+            color: var(--dark-color);
+            margin-bottom: 1rem;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 0.8rem;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+        }
+
+        th {
+            background: #f8f9fa;
+            font-weight: 500;
+            color: #7f8c8d;
+        }
+
+        tr:hover {
+            background: #f8f9fa;
+        }
+
+        .status {
+            display: inline-block;
+            padding: 0.3rem 0.6rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        .status.completed {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .status.pending {
+            background: #fff3cd;
+            color: #856404;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .sidenav {
+                width: 200px;
+            }
+            
+            .main-content {
+                margin-left: 200px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .app-container {
+                flex-direction: column;
+            }
+            
+            .sidenav {
+                width: 100%;
+                height: auto;
+                position: relative;
+                padding: 1rem;
+            }
+            
+            .user-profile {
+                display: flex;
+                align-items: center;
+                text-align: left;
+                margin-bottom: 1rem;
+            }
+            
+            .user-profile img {
+                width: 50px;
+                height: 50px;
+                margin-right: 1rem;
+                margin-bottom: 0;
+            }
+            
+            .sidenav ul {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 0.5rem;
+            }
+            
+            .sidenav li {
+                margin-bottom: 0;
+            }
+            
+            .sidenav a {
+                padding: 0.5rem;
+            }
+            
+            .main-content {
+                margin-left: 0;
+                padding: 1rem;
+            }
+            
+            .dashboard-cards {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .dashboard-cards {
+                grid-template-columns: 1fr;
+            }
+            
+            header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            #currentDateTime {
+                margin-top: 0.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="app-container">
+        <!-- Side Navigation -->
+        <nav class="sidenav">
+            <div class="user-profile">
+                <img src="images/user.png" alt="User Profile" id="userAvatar">
+                <h3 id="userName">Loading...</h3>
+            </div>
+            
+            <ul>
+                <li><a href="dashboard.html" class="active">Dashboard</a></li>
+                <li><a href="products.html">Products</a></li>
+                <li><a href="sales.html">Sales</a></li>
+                <li><a href="reports.html">Reports</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><button onclick="logout()" class="btn-logout">Logout</button></li>
+            </ul>
+        </nav>
+        
+        <!-- Main Content -->
+        <main class="main-content">
+            <header>
+                <h2>Dashboard Overview</h2>
+                <div id="currentDateTime"></div>
+            </header>
+            
+            <div class="dashboard-cards">
+                <div class="card">
+                    <h3>Total Products</h3>
+                    <div class="value" id="totalProducts">0</div>
+                    <div class="trend up">↑ 12% from last month</div>
+                </div>
+                
+                <div class="card">
+                    <h3>Total Sales</h3>
+                    <div class="value" id="totalSales">$0.00</div>
+                    <div class="trend up">↑ 8% from last month</div>
+                </div>
+                
+                <div class="card">
+                    <h3>Low Stock Items</h3>
+                    <div class="value" id="lowStock">0</div>
+                    <div class="trend down">↓ 5% from last month</div>
+                </div>
+                
+                <div class="card">
+                    <h3>Today's Revenue</h3>
+                    <div class="value" id="todayRevenue">$0.00</div>
+                    <div class="trend up">↑ 15% from yesterday</div>
+                </div>
+            </div>
+            
+            <div class="recent-activity">
+                <h3>Recent Sales</h3>
+                <table id="activityTable">
+                    <thead>
+                        <tr>
+                            <th>Order ID</th>
+                            <th>Customer</th>
+                            <th>Amount</th>
+                            <th>Date</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Table will be populated by JavaScript -->
+                    </tbody>
+                </table>
+            </div>
+        </main>
+    </div>
+
+    <script src="js/auth.js"></script>
+    <script src="js/dashboard.js"></script>
+</body>
+</html>
